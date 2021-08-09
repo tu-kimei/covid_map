@@ -1,0 +1,61 @@
+extends layout.pug
+block content
+    #map
+
+    #add-button-group
+        button(type="button" class="btn btn-primary add-helper-button" data-toggle="modal" data-target="#addHelperModals") Chia sẻ
+            svg(xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16")
+                path(d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z")
+        br
+        button(type="button" class="btn btn-success add-receiver-button" data-toggle="modal" data-target="#addHelperModals") Cần trợ giúp   
+            svg(xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fullscreen-exit" viewBox="0 0 16 16")
+                path(d="M5.5 0a.5.5 0 0 1 .5.5v4A1.5 1.5 0 0 1 4.5 6h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5zm5 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 10 4.5v-4a.5.5 0 0 1 .5-.5zM0 10.5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 6 11.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zm10 1a1.5 1.5 0 0 1 1.5-1.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4z")
+
+    //- Popup for add a location
+    #addHelperModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h3.modal-title 
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                      span(aria-hidden='true') &times;
+                .modal-body
+                    form#add-helper-form
+                      div.item_list_group
+                        h5 Nhu yếu phẩm:
+                        div.item_list
+                      div.info_group
+                        h5 Thông tin liên lạc:
+                        .form-group
+                          input#inputTypeOf.form-control(type='text' hidden readonly name="typeOf")
+                        .form-group
+                          label(for='inputName') Name
+                          input#inputName.form-control(type='text' placeholder='Name' name="name")
+                        .form-group
+                          label(for='inputPhone') Phone
+                          input#inputPhone.form-control(type='text' placeholder='Phone' name="phone")
+                        .form-group
+                          label(for='inputAvaiableTo') Avaiable to
+                          input#inputAvaiableTo.form-control(type='text' placeholder='Avaiable to?' name="availableTo")
+                        .form-group#address
+                          label(for='inputAddress' class="") Address
+                          input#add-lat.form-control(type='text' hidden readonly name="latitude")
+                          input#add-long.form-control(type='text' hidden readonly name="longitude")
+                          br
+                          #geocoder
+
+                        #map-view
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-primary.submit-helper-form(type='button') Save changes
+    script.
+        var helper_locations = !{JSON.stringify(helpers)};
+        var receiver_locations = !{JSON.stringify(receivers)};
+    script(type='text/javascript', src='js/mapbox.js')
+    link(rel="stylesheet", href="stylesheets/mapbox.css", type="text/css")
+        
+        
+
+
+
+        

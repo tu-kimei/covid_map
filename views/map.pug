@@ -1,0 +1,22 @@
+extends layout.pug
+block content
+    #map.map
+    #leg_title 
+        span#leg_items Map Legend
+    #leg
+        each layer, i in jmap
+            input(id=layer.name, type='checkbox', checked)
+            span#leg_items #{layer.name}
+            br
+
+
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/css/ol.css", type="text/css")
+    link(rel="stylesheet", href="stylesheets/openlayers_map.css", type="text/css")
+    script(type="text/javascript", src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/build/ol.js")
+    
+    //- script(type='text/javascript', src='js/leaflet_map.js')
+    script(type='text/javascript', src='js/openlayers_map.js')
+    script(type='text/javascript').
+        mapCla.init(#{lat}, #{lng});
+        mapCla.markupHelper(!{JSON.stringify(helpers)});
+        

@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 Select your location
+  div.locationForm
+    form(action="/map" method="POST")
+      select(name="location")
+        each variable in locations
+          option(value=variable.location) #{variable.name}
+      input(type="submit")
